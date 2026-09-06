@@ -21,6 +21,7 @@
                 <button class="nav-btn active" data-tab="inference-tab">Inference & Disentangler</button>
                 <button class="nav-btn" data-tab="xai-tab">Explainable AI (XAI)</button>
                 <button class="nav-btn" data-tab="telemetry-tab">Live Database Telemetry</button>
+                <button class="nav-btn" data-tab="streamlit-tab">🧪 Streamlit Data Science Studio</button>
                 <button class="nav-btn" data-tab="benchmark-tab">Research Benchmarks</button>
                 <button class="nav-btn" data-tab="api-tab">REST API Docs</button>
             </nav>
@@ -207,6 +208,22 @@
                             <!-- Dynamic rows -->
                         </tbody>
                     </table>
+                </div>
+        <!-- TAB: Streamlit Data Science Studio -->
+        <div id="streamlit-tab" class="tab-content">
+            <div class="card glass-card">
+                <div class="card-header">
+                    <div>
+                        <h3>🧪 Streamlit Data Science & Batch Studio</h3>
+                        <p class="section-desc" style="margin-top: 4px;">Integrated Python Data Science engine running simultaneously on port 8501.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="http://localhost:8501" target="_blank" class="api-btn">Open Fullscreen ↗</a>
+                        <button class="refresh-btn" onclick="document.getElementById('streamlit-iframe').src = 'http://localhost:8501'">🔄 Reload Studio</button>
+                    </div>
+                </div>
+                <div style="width: 100%; height: 780px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); background: #0f172a;">
+                    <iframe id="streamlit-iframe" src="http://localhost:8501" style="width: 100%; height: 100%; border: none;"></iframe>
                 </div>
             </div>
         </div>

@@ -260,6 +260,12 @@ with st.sidebar:
     st.markdown("### 💾 Storage & Backend Status")
     st.success("🟢 SQLite Database: Connected (`data/hybridsense.db`)")
     st.info("🟢 REST API Ready: `src/api.py` (FastAPI / Swagger)")
+    st.markdown("""
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+        <a href="http://127.0.0.1:8000" target="_blank" style="background: rgba(99, 102, 241, 0.2); border: 1px solid #6366f1; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; text-align: center; font-weight: 600; font-size: 0.85rem;">🌐 Main Web Portal (Port 8000) ↗</a>
+        <a href="http://127.0.0.1:8000/docs" target="_blank" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #cbd5e1; padding: 6px 12px; border-radius: 6px; text-decoration: none; text-align: center; font-weight: 600; font-size: 0.85rem;">⚡ Swagger OpenAPI Docs ↗</a>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("---")
     st.markdown("### 🏷️ 4-Class Taxonomy")
