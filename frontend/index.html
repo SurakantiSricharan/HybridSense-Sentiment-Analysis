@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HybridSense-X | Enterprise Sentiment Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">HybridSense<span class="logo-accent">-X</span></span>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn active" data-tab="inference-tab">Inference & Disentangler</button>
+                <button class="nav-btn" data-tab="xai-tab">Explainable AI (XAI)</button>
+                <button class="nav-btn" data-tab="telemetry-tab">Live Database Telemetry</button>
+                <button class="nav-btn" data-tab="benchmark-tab">Research Benchmarks</button>
+                <button class="nav-btn" data-tab="api-tab">REST API Docs</button>
+            </nav>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text" id="api-status">API Connected</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-wrapper">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-badge">Research-Grade Deep Learning • 4-Class Sentiment Analysis</div>
+            <h1 class="hero-heading">Aspect-Disentangled Sentiment Intelligence</h1>
+            <p class="hero-subtext">
+                Powered by a cascaded <strong>CNN-BiLSTM-Attention</strong> hybrid neural network. Accurately detecting 
+                <strong>Negative</strong>, <strong>Neutral</strong>, <strong>Positive</strong>, and complex <strong>Ambivalent</strong> mixed polarities in human language.
+            </p>
+        </section>
+
+        <!-- TAB 1: Real-Time Inference -->
+        <div id="inference-tab" class="tab-content active">
+            <div class="dashboard-grid">
+                <!-- Input Panel -->
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h3>📝 Text Input & Model Control</h3>
+                        <div class="model-select-wrapper">
+                            <label for="model-select">Active Classifier:</label>
+                            <select id="model-select">
+                                <option value="Hybrid CNN-BiLSTM-Attention" selected>Hybrid CNN-BiLSTM-Attention (Proposed)</option>
+                                <option value="DistilBERT">DistilBERT (Transformer)</option>
+                                <option value="CNN">CNN (Conv1D)</option>
+                                <option value="BiLSTM">BiLSTM (Bidirectional)</option>
+                                <option value="TF-IDF + Logistic Regression">TF-IDF + Logistic Regression (Baseline)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <textarea id="text-input" placeholder="Type or paste any tweet, consumer review, or sentence..." rows="5">The camera quality is phenomenal, however the battery life is disappointingly terrible.</textarea>
+                    
+                    <div class="preset-buttons">
+                        <span class="preset-label">Test Presets:</span>
+                        <button class="preset-chip" onclick="setSample('ambivalent')">Ambivalent (Mixed)</button>
+                        <button class="preset-chip" onclick="setSample('positive')">Positive</button>
+                        <button class="preset-chip" onclick="setSample('negative')">Negative</button>
+                        <button class="preset-chip" onclick="setSample('neutral')">Neutral</button>
+                    </div>
+
+                    <button id="analyze-btn" class="primary-btn" onclick="analyzeSentiment()">
+                        <span>⚡ Analyze Sentiment & Disentangle</span>
+                    </button>
+                </div>
+
+                <!-- Prediction Results Panel -->
+                <div class="card glass-card result-panel">
+                    <div class="card-header">
+                        <h3>🎯 Classification Results</h3>
+                        <span id="latency-badge" class="latency-badge">⏱️ 14.2 ms</span>
+                    </div>
+
+                    <div id="result-placeholder" class="result-placeholder" style="display: none;">
+                        <p>Enter text and click analyze to see predictions.</p>
+                    </div>
+
+                    <div id="result-box" class="result-box">
+                        <div class="prediction-header">
+                            <div>
+                                <span class="prediction-label-title">Predicted Sentiment</span>
+                                <div id="predicted-badge" class="sentiment-badge badge-ambivalent">Ambivalent</div>
+                            </div>
+                            <div class="confidence-ring">
+                                <span id="confidence-val" class="confidence-number">94.8%</span>
+                                <span class="confidence-sub">Confidence</span>
+                            </div>
+                        </div>
+
+                        <!-- 4-Class Probability Spectrum -->
+                        <div class="spectrum-container">
+                            <div class="spectrum-row">
+                                <div class="spectrum-info">
+                                    <span>Negative (0)</span>
+                                    <span id="prob-neg-txt">1.2%</span>
+                                </div>
+                                <div class="progress-bar"><div id="prob-neg-bar" class="progress-fill fill-negative" style="width: 1.2%;"></div></div>
+                            </div>
+                            <div class="spectrum-row">
+                                <div class="spectrum-info">
+                                    <span>Neutral (1)</span>
+                                    <span id="prob-neu-txt">2.5%</span>
+                                </div>
+                                <div class="progress-bar"><div id="prob-neu-bar" class="progress-fill fill-neutral" style="width: 2.5%;"></div></div>
+                            </div>
+                            <div class="spectrum-row">
+                                <div class="spectrum-info">
+                                    <span>Positive (2)</span>
+                                    <span id="prob-pos-txt">1.5%</span>
+                                </div>
+                                <div class="progress-bar"><div id="prob-pos-bar" class="progress-fill fill-positive" style="width: 1.5%;"></div></div>
+                            </div>
+                            <div class="spectrum-row">
+                                <div class="spectrum-info">
+                                    <span>Ambivalent (3)</span>
+                                    <span id="prob-amb-txt">94.8%</span>
+                                </div>
+                                <div class="progress-bar"><div id="prob-amb-bar" class="progress-fill fill-ambivalent" style="width: 94.8%;"></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Disentangled Clauses -->
+                        <div id="disentangle-section" class="disentangle-section">
+                            <h4 class="section-subtitle">🔀 Disentangled Aspect Clauses</h4>
+                            <div id="clauses-container" class="clauses-container">
+                                <!-- Dynamic clauses populated by JS -->
+                            </div>
+                            <p id="disentangle-explanation" class="disentangle-explanation"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Explainable AI -->
+        <div id="xai-tab" class="tab-content">
+            <div class="card glass-card">
+                <h3>🔬 Explainable AI (XAI) Token Attribution</h3>
+                <p class="section-desc">
+                    Reveals the black box: Visualizes word-by-word token contributions to the overall sentiment.
+                </p>
+                <div class="xai-legend">
+                    <span class="legend-chip chip-pos">🟢 Positive Triggers</span>
+                    <span class="legend-chip chip-neg">🔴 Negative Triggers</span>
+                    <span class="legend-chip chip-dis">🟡 Contrastive Discourse Markers</span>
+                    <span class="legend-chip chip-mod">🟣 Negation Modifiers</span>
+                </div>
+                <div id="token-heatmap" class="token-heatmap">
+                    <!-- Dynamic spans inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Telemetry & Database -->
+        <div id="telemetry-tab" class="tab-content">
+            <div class="kpi-grid">
+                <div class="kpi-box">
+                    <div id="kpi-total" class="kpi-num">0</div>
+                    <div class="kpi-tag">Total Inferences Logged</div>
+                </div>
+                <div class="kpi-box">
+                    <div id="kpi-lat" class="kpi-num">0 ms</div>
+                    <div class="kpi-tag">Average Latency</div>
+                </div>
+                <div class="kpi-box">
+                    <div id="kpi-conf" class="kpi-num">0%</div>
+                    <div class="kpi-tag">Mean Confidence</div>
+                </div>
+                <div class="kpi-box">
+                    <div id="kpi-amb" class="kpi-num">0</div>
+                    <div class="kpi-tag">Ambivalent Inferences</div>
+                </div>
+            </div>
+
+            <div class="card glass-card history-card">
+                <div class="card-header">
+                    <h3>📜 Live SQLite Inference Logs (`data/hybridsense.db`)</h3>
+                    <button class="refresh-btn" onclick="loadTelemetry()">🔄 Refresh Logs</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Timestamp</th>
+                                <th>Input Text</th>
+                                <th>Sentiment</th>
+                                <th>Confidence</th>
+                                <th>Model</th>
+                                <th>Latency</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Benchmarks -->
+        <div id="benchmark-tab" class="tab-content">
+            <div class="card glass-card">
+                <h3>📈 Multi-Model Comparative Evaluation (9,118 Test Samples)</h3>
+                <p class="section-desc">Empirical benchmark results evaluating 5 distinct architectures under identical conditions.</p>
+                <div class="table-responsive">
+                    <table class="data-table benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Architecture</th>
+                                <th>Accuracy</th>
+                                <th>Weighted Precision</th>
+                                <th>Weighted Recall</th>
+                                <th>Macro F1</th>
+                                <th>Weighted F1</th>
+                                <th>Ambivalent Recall</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td><strong>DistilBERT (Transformer)</strong></td>
+                                <td><strong>64.05%</strong></td>
+                                <td>0.6844</td>
+                                <td>0.6405</td>
+                                <td><strong>0.5509</strong></td>
+                                <td><strong>0.6520</strong></td>
+                                <td><strong>83.21%</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>TF-IDF + Logistic Regression</strong></td>
+                                <td>62.48%</td>
+                                <td>0.6543</td>
+                                <td>0.6248</td>
+                                <td>0.5291</td>
+                                <td>0.6344</td>
+                                <td>53.28%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CNN (Conv1D + Pooling)</strong></td>
+                                <td>60.08%</td>
+                                <td>0.6550</td>
+                                <td>0.6008</td>
+                                <td>0.5136</td>
+                                <td>0.6134</td>
+                                <td>81.02%</td>
+                            </tr>
+                            <tr class="hybrid-row">
+                                <td><strong>Hybrid CNN-BiLSTM-Attention (Proposed)</strong></td>
+                                <td>59.41%</td>
+                                <td>0.6185</td>
+                                <td>0.5941</td>
+                                <td>0.5083</td>
+                                <td>0.5993</td>
+                                <td>70.07%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>BiLSTM (Bidirectional)</strong></td>
+                                <td>58.29%</td>
+                                <td>0.6296</td>
+                                <td>0.5829</td>
+                                <td>0.5064</td>
+                                <td>0.5959</td>
+                                <td>75.91%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: REST API -->
+        <div id="api-tab" class="tab-content">
+            <div class="card glass-card">
+                <h3>⚡ Enterprise REST API Integration</h3>
+                <p class="section-desc">HybridSense-X provides an asynchronous FastAPI service adhering to OpenAPI / Swagger specifications.</p>
+                <div class="api-links">
+                    <a href="http://127.0.0.1:8000/docs" target="_blank" class="api-btn">Interactive Swagger UI Docs ↗</a>
+                    <a href="http://127.0.0.1:8000/api/v1/health" target="_blank" class="api-btn secondary">Health Endpoint ↗</a>
+                </div>
+                
+                <h4 style="margin-top: 1.5rem; color: #f8fafc;">Sample POST /api/v1/predict</h4>
+                <pre class="code-block"><code>curl -X POST "http://127.0.0.1:8000/api/v1/predict" \
+     -H "Content-Type: application/json" \
+     -d '{"text": "The camera is great, but the battery is terrible.", "model_name": "Hybrid CNN-BiLSTM-Attention"}'</code></pre>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -52,14 +52,33 @@ class DisentangleRequest(BaseModel):
     text: str = Field(..., example="The food was delicious, however the customer service was awful.")
 
 
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
+
 @app.get("/")
 def root():
+    index_file = FRONTEND_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(str(index_file))
     return {
         "system": "HybridSense-X Research Platform",
         "version": "2.0.0",
         "docs_url": "/docs",
         "status": "online"
     }
+
+@app.get("/style.css")
+def get_css():
+    return FileResponse(str(FRONTEND_DIR / "style.css"))
+
+@app.get("/app.js")
+def get_js():
+    return FileResponse(str(FRONTEND_DIR / "app.js"))
 
 
 @app.get("/api/v1/health")
