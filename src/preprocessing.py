@@ -60,11 +60,14 @@ def load_keras_tokenizer(load_path=config.TOKENIZER_PATH):
     with open(load_path, "rb") as f:
         return pickle.load(f)
 
-def tokenize_and_pad(texts, tokenizer, max_seq_len: int = config.MAX_SEQ_LEN):
+def tokenize_and_pad(texts, tokenizer, max_seq_len: int = config.MAX_SEQ_LEN, maxlen: int = None):
     """
     Converts list of texts to padded integer sequences.
+    Supports both max_seq_len and maxlen keyword arguments.
     """
+    target_len = maxlen if maxlen is not None else max_seq_len
     cleaned = [clean_tweet_text(t) for t in texts]
     sequences = tokenizer.texts_to_sequences(cleaned)
-    padded = pad_sequences(sequences, maxlen=max_seq_len, padding="post", truncating="post")
+    padded = pad_sequences(sequences, maxlen=target_len, padding="post", truncating="post")
     return padded
+

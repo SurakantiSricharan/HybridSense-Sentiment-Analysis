@@ -216,7 +216,7 @@ def run_inference(text: str, model_name: str):
     else:
         mdl = MODELS.get(model_name)
         if mdl and KERAS_TOKENIZER:
-            seq = tokenize_and_pad([text], KERAS_TOKENIZER, maxlen=config.MAX_SEQ_LEN)
+            seq = tokenize_and_pad([text], KERAS_TOKENIZER, max_seq_len=config.MAX_SEQ_LEN)
             raw = mdl.predict(seq, verbose=0)
             if isinstance(raw, (list, tuple)):
                 probs = raw[0][0].tolist()
