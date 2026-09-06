@@ -1,0 +1,24 @@
+BiLSTM SENTIMENT CLASSIFIER REPORT
+============================================================
+Accuracy:    0.5829
+Precision:   0.6296
+Recall:      0.5829
+Macro F1:    0.5064
+Weighted F1: 0.5959
+
+              precision    recall  f1-score   support
+
+    Negative     0.4193    0.6444    0.5080      1375
+     Neutral     0.6507    0.5330    0.5860      4086
+    Positive     0.7051    0.6099    0.6541      3520
+  Ambivalent     0.1697    0.7591    0.2773       137
+
+    accuracy                         0.5829      9118
+   macro avg     0.4862    0.6366    0.5064      9118
+weighted avg     0.6296    0.5829    0.5959      9118
+
+Confusion Matrix:
+[[ 886  270  102  117]
+ [ 902 2178  788  218]
+ [ 303  896 2147  174]
+ [  22    3    8  104]]

@@ -1,0 +1,19 @@
+transition,text,true_label,pred_label,confidence
+Negative -> Ambivalent,"""Jeff Foxworthy on Muslims: 1. If you grow and refine heroin for a living, but you have a moral objection to liquor, You may be a Muslim.""",Negative,Ambivalent,0.8551
+Negative -> Ambivalent,'Don't tell the Bride' really is dreadful - I think it may actually be worse than 'Big Brother',Negative,Ambivalent,0.4861
+Negative -> Ambivalent,@user I really don\u2019t know why you can\u2019t wait for me to get to LAX tomorrow\u002c Chrissy. Us being the best of friends and all..rude.,Negative,Ambivalent,0.8735
+Positive -> Ambivalent,Sunday Supplement are honestly making out that Kane is one of the best strikers in the world.  He isn't even the best striker at Tottenham.,Positive,Ambivalent,0.618
+Positive -> Ambivalent,"""No, Caitlyn Jenner may not be a war hero, but she's been such an inspiration to many young people who need someone like her to look up to.""",Positive,Ambivalent,0.9924
+Positive -> Ambivalent,"""Tomorrow morning, while twilight is still dim, look for #Mars beneath the #Crescent_Moon""",Positive,Ambivalent,0.5629
+Neutral -> Ambivalent,Y'all may make fun of Are We There Yet? but Ice Cube made that movie for his younger fans AKA me mofucka #CubeHive,Neutral,Ambivalent,0.9281
+Neutral -> Ambivalent,@user they may have but he is down to NC State and Baylor,Neutral,Ambivalent,0.5441
+Neutral -> Ambivalent,"@user May 4th, which I just realized is Star Wars Day. So a leeeettle early, but can still happen.""",Neutral,Ambivalent,0.7659
+Ambivalent -> Negative,Donald Trump pledges 2 forgo a 3rd- party run. While Chris Christie pledges never 2 run let alone jog as he sometimes forgets his nebulizer.,Ambivalent,Negative,0.4275
+Ambivalent -> Negative,"""Carly Fiorina isn't the 1st person 2 Xpose #HillaryClinton as Corrupt Liar, but it seems the press only cares 2 give a women any PC coverage""",Ambivalent,Negative,0.5387
+Ambivalent -> Negative,"""Gay sex may be a sin, but who are we to judge? How does it affect us? Let God be the judge. Don't tell me you've never sinned... #hypocrites""",Ambivalent,Negative,0.3768
+Ambivalent -> Positive,I remember watching Friday I would always think Ice Cube was cute but now he's old :/,Ambivalent,Positive,0.4151
+Ambivalent -> Positive,@user I got you homie and yeah a lot people haven't Curtis saw me fight 2 oils riggers in CS lol but I might fight Dec 14th,Ambivalent,Positive,0.5032
+Ambivalent -> Positive,@user Ohhh! I'm gonna be getting back into it on PS4 on 15th think I should start fresh though as I've not played in ages.,Ambivalent,Positive,0.4723
+Ambivalent -> Neutral,July 21 2015: there is another unwarranted official holiday in Pakistan  although three days of Eid are gone. a wrong decision by the govt.,Ambivalent,Neutral,0.8058
+Ambivalent -> Neutral,"""I really like the way Josh Hamilton is swinging  the bat. More bat speed. Even though he K'd in the 3rd, he made some violent swings""",Ambivalent,Neutral,0.3494
+Ambivalent -> Neutral,Harry Kane may be a noble prince but he can't score goals without his army behind him aka WHY IS KANE ALWAYS ALONE UP FRONT CMON GUYS UGH,Ambivalent,Neutral,0.3408

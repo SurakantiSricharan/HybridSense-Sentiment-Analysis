@@ -1,0 +1,24 @@
+BASELINE MODEL (TF-IDF + Logistic Regression)
+============================================================
+Accuracy:    0.6248
+Precision:   0.6543
+Recall:      0.6248
+Macro F1:    0.5291
+Weighted F1: 0.6344
+
+              precision    recall  f1-score   support
+
+    Negative     0.4561    0.6276    0.5283      1375
+     Neutral     0.6834    0.5979    0.6378      4086
+    Positive     0.7165    0.6585    0.6863      3520
+  Ambivalent     0.1755    0.5328    0.2640       137
+
+    accuracy                         0.6248      9118
+   macro avg     0.5079    0.6042    0.5291      9118
+weighted avg     0.6543    0.6248    0.6344      9118
+
+Confusion Matrix:
+[[ 863  297  148   67]
+ [ 727 2443  753  163]
+ [ 266  823 2318  113]
+ [  36   12   16   73]]

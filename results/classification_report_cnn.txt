@@ -1,0 +1,24 @@
+CNN SENTIMENT CLASSIFIER REPORT
+============================================================
+Accuracy:    0.6008
+Precision:   0.6550
+Recall:      0.6008
+Macro F1:    0.5136
+Weighted F1: 0.6134
+
+              precision    recall  f1-score   support
+
+    Negative     0.4602    0.6269    0.5308      1375
+     Neutral     0.7187    0.4971    0.5877      4086
+    Positive     0.6771    0.7028    0.6897      3520
+  Ambivalent     0.1451    0.8102    0.2461       137
+
+    accuracy                         0.6008      9118
+   macro avg     0.5003    0.6593    0.5136      9118
+weighted avg     0.6550    0.6008    0.6134      9118
+
+Confusion Matrix:
+[[ 862  210  166  137]
+ [ 745 2031 1008  302]
+ [ 251  580 2474  215]
+ [  15    5    6  111]]

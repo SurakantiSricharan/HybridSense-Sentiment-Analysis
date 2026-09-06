@@ -1,0 +1,24 @@
+HYBRID CNN-BiLSTM-ATTENTION MODEL REPORT
+============================================================
+Accuracy:    0.5941
+Precision:   0.6185
+Recall:      0.5941
+Macro F1:    0.5083
+Weighted F1: 0.5993
+
+              precision    recall  f1-score   support
+
+    Negative     0.4740    0.5105    0.4916      1375
+     Neutral     0.6651    0.5210    0.5843      4086
+    Positive     0.6380    0.7074    0.6709      3520
+  Ambivalent     0.1801    0.7007    0.2866       137
+
+    accuracy                         0.5941      9118
+   macro avg     0.4893    0.6099    0.5083      9118
+weighted avg     0.6185    0.5941    0.5993      9118
+
+Confusion Matrix:
+[[ 702  360  192  121]
+ [ 562 2129 1197  198]
+ [ 204  708 2490  118]
+ [  13    4   24   96]]

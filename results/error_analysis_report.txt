@@ -1,0 +1,1091 @@
+============================================================
+HYBRIDSENSE: DETAILED ERROR ANALYSIS & DIAGNOSTICS
+============================================================
+
+1. TRANSITION DISTRIBUTION TABLE
+------------------------------------------------------------
+            transition  count  total_true  error_rate_pct
+Negative -> Ambivalent    121        1375            8.80
+Positive -> Ambivalent    118        3520            3.35
+ Neutral -> Ambivalent    198        4086            4.85
+Ambivalent -> Negative     13         137            9.49
+Ambivalent -> Positive     24         137           17.52
+ Ambivalent -> Neutral      4         137            2.92
+
+2. QUALITATIVE ERROR DIAGNOSIS & ROOT CAUSES
+------------------------------------------------------------
+A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-A. Ambivalent -> Neutral / Positive / Negative:
+   - Clause Asymmetry: Tweets where one clause has mild sentiment while the contrasting
+     clause contains strong emotional words often bias the sequential LSTM toward the dominant clause.
+   - Implicit Contrast: Sarcasm or subtweets that express mixed evaluation without explicit
+     markers (e.g. 'Oh great, another delay just when my flight was about to leave') are frequently
+     absorbed into purely Negative or Neutral.
+   - Short Text Length: Tweets under 10 words lack sufficient token context for the Attention mechanism
+     to balance multiple sentiment poles.
+
+B. Negative / Positive -> Ambivalent (False Positives):
+   - Rhetorical Conjunctions: Tweets using 'but' or 'though' in non-contrastive ways (e.g. 'I love you but
+     seriously, happy birthday!') trigger high attention weights on both the greeting and the phrase,
+     leading to an ambivalent prediction.
+   - Slang & Complex Negations: Idiomatic expressions containing negative words (e.g. 'this is sick',
+     'not bad at all') confuse n-gram feature extractors when paired with emojis.
+
+3. REPRESENTATIVE ACTUAL TEST SAMPLES BY CATEGORY
+-
+[Negative -> Ambivalent] Conf: 0.8551
+Text: "Jeff Foxworthy on Muslims: 1. If you grow and refine heroin for a living, but you have a moral objection to liquor, You may be a Muslim."
+
+[Negative -> Ambivalent] Conf: 0.4861
+Text: 'Don't tell the Bride' really is dreadful - I think it may actually be worse than 'Big Brother'
+
+[Negative -> Ambivalent] Conf: 0.8735
+Text: @user I really don\u2019t know why you can\u2019t wait for me to get to LAX tomorrow\u002c Chrissy. Us being the best of friends and all..rude.
+
+[Positive -> Ambivalent] Conf: 0.618
+Text: Sunday Supplement are honestly making out that Kane is one of the best strikers in the world.  He isn't even the best striker at Tottenham.
+
+[Positive -> Ambivalent] Conf: 0.9924
+Text: "No, Caitlyn Jenner may not be a war hero, but she's been such an inspiration to many young people who need someone like her to look up to."
+
+[Positive -> Ambivalent] Conf: 0.5629
+Text: "Tomorrow morning, while twilight is still dim, look for #Mars beneath the #Crescent_Moon"
+
+[Neutral -> Ambivalent] Conf: 0.9281
+Text: Y'all may make fun of Are We There Yet? but Ice Cube made that movie for his younger fans AKA me mofucka #CubeHive
+
+[Neutral -> Ambivalent] Conf: 0.5441
+Text: @user they may have but he is down to NC State and Baylor
+
+[Neutral -> Ambivalent] Conf: 0.7659
+Text: @user May 4th, which I just realized is Star Wars Day. So a leeeettle early, but can still happen."
+
+[Ambivalent -> Negative] Conf: 0.4275
+Text: Donald Trump pledges 2 forgo a 3rd- party run. While Chris Christie pledges never 2 run let alone jog as he sometimes forgets his nebulizer.
+
+[Ambivalent -> Negative] Conf: 0.5387
+Text: "Carly Fiorina isn't the 1st person 2 Xpose #HillaryClinton as Corrupt Liar, but it seems the press only cares 2 give a women any PC coverage"
+
+[Ambivalent -> Negative] Conf: 0.3768
+Text: "Gay sex may be a sin, but who are we to judge? How does it affect us? Let God be the judge. Don't tell me you've never sinned... #hypocrites"
+
+[Ambivalent -> Positive] Conf: 0.4151
+Text: I remember watching Friday I would always think Ice Cube was cute but now he's old :/
+
+[Ambivalent -> Positive] Conf: 0.5032
+Text: @user I got you homie and yeah a lot people haven't Curtis saw me fight 2 oils riggers in CS lol but I might fight Dec 14th
+
+[Ambivalent -> Positive] Conf: 0.4723
+Text: @user Ohhh! I'm gonna be getting back into it on PS4 on 15th think I should start fresh though as I've not played in ages.
+
+[Ambivalent -> Neutral] Conf: 0.8058
+Text: July 21 2015: there is another unwarranted official holiday in Pakistan  although three days of Eid are gone. a wrong decision by the govt.
+
+[Ambivalent -> Neutral] Conf: 0.3494
+Text: "I really like the way Josh Hamilton is swinging  the bat. More bat speed. Even though he K'd in the 3rd, he made some violent swings"
+
+[Ambivalent -> Neutral] Conf: 0.3408
+Text: Harry Kane may be a noble prince but he can't score goals without his army behind him aka WHY IS KANE ALWAYS ALONE UP FRONT CMON GUYS UGH
+
