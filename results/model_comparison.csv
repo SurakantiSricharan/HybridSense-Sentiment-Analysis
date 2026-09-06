@@ -2,4 +2,5 @@ model,accuracy,precision,recall,macro_f1,weighted_f1
 TF-IDF + Logistic Regression,0.6248,0.6543,0.6248,0.5291,0.6344
 CNN,0.6008,0.655,0.6008,0.5136,0.6134
 BiLSTM,0.5829,0.6296,0.5829,0.5064,0.5959
+DistilBERT,0.6405,0.6844,0.6405,0.5509,0.652
 Hybrid CNN-BiLSTM-Attention,0.5941,0.6185,0.5941,0.5083,0.5993

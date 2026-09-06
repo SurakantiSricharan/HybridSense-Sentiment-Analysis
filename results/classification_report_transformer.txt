@@ -1,0 +1,24 @@
+DISTILBERT SENTIMENT CLASSIFIER REPORT
+============================================================
+Accuracy:    0.6364
+Precision:   0.6664
+Recall:      0.6364
+Macro F1:    0.6218
+Weighted F1: 0.6376
+
+              precision    recall  f1-score   support
+
+    Negative     0.4709    0.6818    0.5570       308
+     Neutral     0.7405    0.5253    0.6146       929
+    Positive     0.6876    0.7182    0.7026       763
+  Ambivalent     0.4851    0.8321    0.6129       137
+
+    accuracy                         0.6364      2137
+   macro avg     0.5960    0.6894    0.6218      2137
+weighted avg     0.6664    0.6364    0.6376      2137
+
+Confusion Matrix:
+[[210  38  26  34]
+ [184 488 209  48]
+ [ 45 131 548  39]
+ [  7   2  14 114]]
