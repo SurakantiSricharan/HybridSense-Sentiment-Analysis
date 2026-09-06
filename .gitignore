@@ -12,3 +12,5 @@ __pycache__/
 models/distilbert_sentiment/
 data/raw/
 scratch/
+*.db
+HybridSense-Sentiment-Analysis/
