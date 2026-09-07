@@ -3,7 +3,7 @@
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/Framework-TensorFlow%20%7C%20PyTorch%20%7C%20HuggingFace-orange.svg)](https://tensorflow.org)
 [![Deployment](https://img.shields.io/badge/App-Streamlit-red.svg)](https://streamlit.io)
-[![Status](https://img.shields.io/badge/Academic-B.Tech%20AIML%20Project-green.svg)]()
+[![Status](https://img.shields.io/badge/Academic-E--batch--5-green.svg)]()
 
 > **HybridSense** is an academic AI/ML project that extends conventional 3-class sentiment analysis into a **4-class classification paradigm**:
 > **0: Negative**, **1: Neutral**, **2: Positive**, and **3: Ambivalent**.
@@ -141,7 +141,7 @@ HybridSense-Sentiment-Analysis/
 │   └── app.py                                 # Streamlit web application
 │
 ├── PROJECT_PROGRESS.md                        # Phase completion tracker
-├── PROJECT_REPORT.md                          # Academic B.Tech AIML Review 1 report
+├── PROJECT_REPORT.md                          # Academic E-batch-5 Review 1 report
 ├── requirements.txt                           # Verified dependencies
 └── README.md                                  # Project overview
 ```
@@ -210,7 +210,7 @@ Test the model in the Streamlit app with these benchmark phrases:
 ---
 
 ## 🎓 Academic Review 1 Compliance
-This project fulfills all eight stages of the B.Tech AIML review:
+This project fulfills all eight stages of the E-batch-5 review:
 1. **Problem Identification**: Documented in Section 1 and `PROJECT_REPORT.md`.
 2. **Literature Survey**: 5 published 2024 academic works cited and reviewed.
 3. **Requirement Analysis**: Functional, non-functional, hardware, and software requirements specified.
@@ -223,4 +223,4 @@ This project fulfills all eight stages of the B.Tech AIML review:
 ---
 
 ## 👥 Authors
-- **B.Tech AIML Student Team**, Final Year Project.
+- **E-batch-5**, Final Year Project.

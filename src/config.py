@@ -50,7 +50,7 @@ MAX_VOCAB_SIZE = 20000
 MAX_SEQ_LEN = 80
 EMBEDDING_DIM = 128
 
-# Training Settings (CPU-optimized for reliable student laptop execution)
+# Training Settings (CPU-optimized for reliable E-batch-5 execution)
 BATCH_SIZE = 64
 EPOCHS = 6
 PATIENCE = 2

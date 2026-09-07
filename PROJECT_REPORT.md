@@ -1,5 +1,5 @@
 # HybridSense: 4-Class Sentiment Analysis via CNN-BiLSTM-Attention Network
-## Comprehensive Academic Project Report (B.Tech AIML - Review 1)
+## Comprehensive Academic Project Report (E-batch-5 - Review 1)
 
 ---
 
@@ -74,7 +74,7 @@ A comprehensive survey of contemporary literature in deep learning and NLP-based
 - **Operating System**: Windows 11 (64-bit)
 - **Python Version**: Python 3.10.11
 - **Core Libraries**: TensorFlow 2.21.0, PyTorch 2.13.0, Scikit-learn 1.7.2, Transformers 5.15.1, Pandas 2.3.3, NumPy 2.2.6, Streamlit, Matplotlib, Seaborn, VADER.
-- **Compute Constraints**: Native Windows CPU architecture (CUDA/GPU acceleration disabled). Model sizes, sequence lengths ($80$), and batch sizes ($64$) are calibrated for efficient student-laptop training without memory overflow.
+- **Compute Constraints**: Native Windows CPU architecture (CUDA/GPU acceleration disabled). Model sizes, sequence lengths ($80$), and batch sizes ($64$) are calibrated for efficient E-batch-5 laptop training without memory overflow.
 
 ---
 

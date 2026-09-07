@@ -277,7 +277,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    st.caption("HybridSense-X • B.Tech AIML Major Project")
+    st.caption("HybridSense-X • E-batch-5 Major Project")
 
 
 # Main Tab Navigation

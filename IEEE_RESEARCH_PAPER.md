@@ -1,7 +1,7 @@
 # Aspect-Disentangled Dual-Attention Network for Explainable 4-Class Ambivalent Sentiment Classification in Social Streams
 
 **Surakanti Sricharan**, Department of Artificial Intelligence & Machine Learning  
-*B.Tech Capstone Research Project Report / IEEE Conference Format*  
+*E-batch-5 Capstone Research Project Report / IEEE Conference Format*  
 
 ---
 
