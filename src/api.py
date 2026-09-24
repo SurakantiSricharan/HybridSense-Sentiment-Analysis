@@ -192,6 +192,53 @@ def submit_feedback(req: FeedbackRequest):
     return {"status": "success", "message": "Feedback recorded in database"}
 
 
+class StreamStartRequest(BaseModel):
+    source: Optional[str] = Field("simulation", example="simulation")
+    query: Optional[str] = Field("technology", example="technology")
+    interval: Optional[float] = Field(2.0, example=2.0)
+    model_name: Optional[str] = Field("Hybrid CNN-BiLSTM-Attention", example="Hybrid CNN-BiLSTM-Attention")
+    twitter_bearer: Optional[str] = None
+
+
+from src.social_stream import STREAM_ENGINE
+
+
+@app.post("/api/v1/stream/start")
+def start_live_stream(req: Optional[StreamStartRequest] = None):
+    """Start autonomous background streaming from social media sources."""
+    if req is None:
+        req = StreamStartRequest()
+    status = STREAM_ENGINE.start(
+        source=req.source,
+        query=req.query,
+        interval=req.interval,
+        model_name=req.model_name,
+        twitter_bearer=req.twitter_bearer
+    )
+    return {"status": "started", "stream": status}
+
+
+@app.post("/api/v1/stream/stop")
+def stop_live_stream():
+    """Halt background social streaming."""
+    status = STREAM_ENGINE.stop()
+    return {"status": "stopped", "stream": status}
+
+
+@app.get("/api/v1/stream/status")
+def get_stream_status():
+    """Check live status, throughput, and counts of the automated social stream."""
+    return STREAM_ENGINE.get_status()
+
+
+@app.get("/api/v1/stream/recent")
+def get_stream_recent(limit: int = 25):
+    """Get latest analyzed posts from the in-memory stream buffer."""
+    posts = STREAM_ENGINE.get_recent_posts(limit=limit)
+    return {"count": len(posts), "posts": posts}
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
+

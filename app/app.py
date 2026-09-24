@@ -281,8 +281,9 @@ with st.sidebar:
 
 
 # Main Tab Navigation
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab_stream, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "🚀 Real-Time Inference & Disentangler",
+    "📡 Live Social Media Stream",
     "🔬 Explainable AI (XAI) Saliency",
     "📊 Persistent Telemetry & Database",
     "📁 Batch CSV Processing",
@@ -371,6 +372,85 @@ with tab1:
                 if st.button("Save Feedback to DB"):
                     log_feedback(log_id, fb_label, fb_comment)
                     st.success("✅ Feedback successfully logged to database!")
+
+# ----------------- TAB: Autonomous Social Media Stream -----------------
+with tab_stream:
+    st.markdown("#### 📡 Autonomous Social Media Stream & Direct Telemetry Ingestion")
+    st.markdown(
+        "Direct continuous ingestion that fetches live social media posts from Reddit or high-velocity "
+        "streams, automatically classifies sentiment with the active model, disentangles conflicting clauses, "
+        "and logs each post to SQLite."
+    )
+    
+    from src.social_stream import STREAM_ENGINE
+    
+    status = STREAM_ENGINE.get_status()
+    is_live = status["is_running"]
+    
+    col_ctrl1, col_ctrl2, col_ctrl3, col_ctrl4 = st.columns([1.2, 1, 1, 1.2])
+    with col_ctrl1:
+        stream_src = st.selectbox(
+            "Social Stream Source:",
+            ["Real-Time Ticker (Simulation)", "Reddit Live (r/technology)", "Reddit Live (r/gadgets)", "Reddit Live (r/apple)"],
+            index=0
+        )
+    with col_ctrl2:
+        stream_spd = st.selectbox(
+            "Ingestion Interval:",
+            [1.5, 2.5, 4.0],
+            index=1,
+            format_func=lambda x: f"{x}s / post"
+        )
+    with col_ctrl3:
+        st.write("")
+        st.write("")
+        if not is_live:
+            if st.button("▶ Start Live Stream", type="primary", use_container_width=True):
+                mapped_source = "reddit" if "Reddit" in stream_src else "simulation"
+                query_map = {
+                    "Reddit Live (r/technology)": "technology",
+                    "Reddit Live (r/gadgets)": "gadgets",
+                    "Reddit Live (r/apple)": "apple"
+                }
+                q = query_map.get(stream_src, "technology")
+                STREAM_ENGINE.start(source=mapped_source, query=q, interval=stream_spd, model_name=selected_model)
+                st.rerun()
+        else:
+            if st.button("⏹ Stop Stream", use_container_width=True):
+                STREAM_ENGINE.stop()
+                st.rerun()
+    with col_ctrl4:
+        st.write("")
+        st.write("")
+        if st.button("🔄 Refresh Stream Feed", use_container_width=True):
+            st.rerun()
+            
+    # Metrics
+    m1, m2, m3, m4, m5 = st.columns(5)
+    m1.metric("Stream Status", "🟢 RUNNING" if is_live else "⚪ IDLE")
+    m2.metric("Total Streamed", status["total_streamed"])
+    m3.metric("Ambivalent Caught", status["ambivalent_count"])
+    m4.metric("Positive Posts", status["positive_count"])
+    m5.metric("Negative Posts", status["negative_count"])
+    
+    st.markdown("---")
+    st.markdown("##### 📜 Live Ingested Social Posts Buffer")
+    recent_posts = STREAM_ENGINE.get_recent_posts(limit=25)
+    if recent_posts:
+        stream_rows = []
+        for p in recent_posts:
+            stream_rows.append({
+                "Timestamp": p.get("timestamp"),
+                "Platform": p.get("platform"),
+                "Author": p.get("author"),
+                "Text": p.get("text"),
+                "Predicted Sentiment": p.get("predicted_label"),
+                "Confidence": f"{p.get('confidence', 0)*100:.1f}%",
+                "Latency (ms)": p.get("latency_ms")
+            })
+        st.dataframe(pd.DataFrame(stream_rows), use_container_width=True)
+    else:
+        st.info("Live stream buffer empty. Click '▶ Start Live Stream' to begin automated ingestion!")
 
 # ----------------- TAB 2: Explainable AI -----------------
 with tab2:

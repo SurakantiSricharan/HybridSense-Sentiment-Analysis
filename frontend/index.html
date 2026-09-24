@@ -19,6 +19,7 @@
             </div>
             <nav class="nav-links">
                 <button class="nav-btn active" data-tab="inference-tab">Inference & Disentangler</button>
+                <button class="nav-btn" data-tab="stream-tab">📡 Live Social Stream</button>
                 <button class="nav-btn" data-tab="xai-tab">Explainable AI (XAI)</button>
                 <button class="nav-btn" data-tab="telemetry-tab">Live Database Telemetry</button>
                 <button class="nav-btn" data-tab="streamlit-tab">🧪 Streamlit Data Science Studio</button>
@@ -141,6 +142,94 @@
                             </div>
                             <p id="disentangle-explanation" class="disentangle-explanation"></p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: Live Social Media Stream -->
+        <div id="stream-tab" class="tab-content">
+            <div class="card glass-card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+                    <div>
+                        <h3>📡 Autonomous Social Media Stream & Live Telemetry</h3>
+                        <p class="section-desc" style="margin-top: 4px;">
+                            Zero-copy continuous ingestion directly analyzing live social streams via HybridSense-X and logging into SQLite.
+                        </p>
+                    </div>
+                    <div id="stream-live-indicator" class="pulse-badge" style="display: none;">
+                        <span class="pulse-dot"></span>
+                        <span id="stream-status-label">STREAM LIVE</span>
+                    </div>
+                </div>
+
+                <!-- Stream Configuration Bar -->
+                <div class="stream-header-controls">
+                    <div class="stream-control-item">
+                        <label for="stream-source">Stream Source:</label>
+                        <select id="stream-source" class="stream-select" onchange="toggleCustomQuery()">
+                            <option value="simulation" selected>⚡ Real-Time High-Velocity Ticker (Simulation)</option>
+                            <option value="reddit">Reddit Live (r/technology)</option>
+                            <option value="reddit_gadgets">Reddit Live (r/gadgets)</option>
+                            <option value="reddit_apple">Reddit Live (r/apple)</option>
+                            <option value="reddit_custom">Reddit Live (Custom Subreddit...)</option>
+                        </select>
+                    </div>
+                    <div class="stream-control-item" id="custom-query-wrapper" style="display: none;">
+                        <label for="stream-query">Custom Subreddit / Topic:</label>
+                        <input type="text" id="stream-query" class="stream-input" placeholder="e.g. android, ArtificialInteligence" value="technology">
+                    </div>
+                    <div class="stream-control-item">
+                        <label for="stream-model">Inference Model:</label>
+                        <select id="stream-model" class="stream-select">
+                            <option value="Hybrid CNN-BiLSTM-Attention" selected>Hybrid CNN-BiLSTM-Attention (Proposed)</option>
+                            <option value="DistilBERT">DistilBERT (Transformer)</option>
+                            <option value="CNN">CNN (Conv1D)</option>
+                            <option value="BiLSTM">BiLSTM (Bidirectional)</option>
+                            <option value="TF-IDF + Logistic Regression">TF-IDF + Logistic Regression</option>
+                        </select>
+                    </div>
+                    <div class="stream-control-item">
+                        <label for="stream-speed">Ingestion Rate:</label>
+                        <select id="stream-speed" class="stream-select">
+                            <option value="1.5">Fast (1.5s / post)</option>
+                            <option value="2.5" selected>Normal (2.5s / post)</option>
+                            <option value="4.0">Slow (4.0s / post)</option>
+                        </select>
+                    </div>
+                    <div class="stream-actions">
+                        <button id="btn-toggle-stream" class="btn-stream-start" onclick="toggleStream()">
+                            <span>▶ Start Live Stream</span>
+                        </button>
+                        <button class="refresh-btn" onclick="clearStreamFeed()" title="Clear Ticker">🧹 Clear</button>
+                    </div>
+                </div>
+
+                <!-- Stream KPI Summary -->
+                <div class="kpi-grid" style="margin-bottom: 1.5rem;">
+                    <div class="kpi-box">
+                        <div id="stream-kpi-total" class="kpi-num">0</div>
+                        <div class="kpi-tag">Streamed Inferences</div>
+                    </div>
+                    <div class="kpi-box" style="border-color: rgba(168, 85, 247, 0.3);">
+                        <div id="stream-kpi-amb" class="kpi-num" style="color: #c084fc;">0</div>
+                        <div class="kpi-tag">Ambivalent Disentangled</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div id="stream-kpi-pos" class="kpi-num" style="color: #34d399;">0</div>
+                        <div class="kpi-tag">Positive Posts</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div id="stream-kpi-neg" class="kpi-num" style="color: #f87171;">0</div>
+                        <div class="kpi-tag">Negative Posts</div>
+                    </div>
+                </div>
+
+                <!-- Live Stream Feed Container -->
+                <h4 style="margin-bottom: 0.8rem; color: #cbd5e1; font-weight: 600;">Incoming Live Stream Posts</h4>
+                <div id="stream-feed-container" class="stream-feed">
+                    <div id="stream-empty-hint" style="text-align: center; padding: 2.5rem; color: #64748b;">
+                        Click <strong>"▶ Start Live Stream"</strong> above to begin automated social media ingestion and sentiment classification.
                     </div>
                 </div>
             </div>

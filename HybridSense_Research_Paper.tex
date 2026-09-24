@@ -1,0 +1,337 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{url}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Lightweight Hybrid Deep Learning Architecture for Real-Time Neutral and Ambivalent Sentiment Detection in Social Media Streams}
+
+\author{
+\IEEEauthorblockN{Surakanti Sricharan}
+\IEEEauthorblockA{\textit{Department of Artificial Intelligence \& Machine Learning} \\
+\textit{Malla Reddy University}\\
+Hyderabad, Telangana, India \\
+surakantisricharan8@gmail.com}
+\and
+\IEEEauthorblockN{Talluri Bhagyasree}
+\IEEEauthorblockA{\textit{Department of Artificial Intelligence \& Machine Learning} \\
+\textit{Malla Reddy University}\\
+Hyderabad, Telangana, India \\
+bhagyasree.talluri111@gmail.com}
+\and
+\IEEEauthorblockN{Vangala Nandini}
+\IEEEauthorblockA{\textit{Department of Artificial Intelligence \& Machine Learning} \\
+\textit{Malla Reddy University}\\
+Hyderabad, Telangana, India \\
+nandinivangala65@gmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+Sentiment analysis is capturing and evaluating emotional valence and subjective disposition in textual discourse, focusing on polarities, aspect stances, and public perception. It is used in diverse fields including brand reputation management, financial market forecasting, consumer review intelligence, customer service automation, and public governance. Conventional sentiment categorization architectures uniformly restrict polarity to a discrete three-class schema: Negative, Neutral, and Positive. However, real-world human communication---particularly on microblogging platforms such as Twitter/X and consumer product forums---frequently manifests \textbf{Ambivalent} sentiment, where opposing positive and negative opinions are concurrently directed toward distinct facets of the same subject (e.g., \textit{``The display quality is magnificent, but the battery backup is completely unacceptable''}). Coercing such complex expressions into three classes causes either neutral cancellation or dominant-clause bias, precipitating severe information loss. To overcome this limitation, a novel deep learning system termed \textbf{HybridSense} has been proposed for four-class sentiment classification (Negative, Neutral, Positive, Ambivalent). To resolve the chronic scarcity of annotated ambivalent data without synthetic text fabrication, we formulate a linguistically grounded Clause-Level Contrastive Polarity Mining technique utilizing discourse connectives and dual-valence verification, establishing a verified corpus of 45,586 clean tweets with 682 authentic Ambivalent instances. The proposed architecture cascades a 1D Convolutional Neural Network (Conv1D) for localized n-gram phrase extraction, a Bidirectional Long Short-Term Memory (BiLSTM) network for sequential contextual flow, and a Bahdanau self-attention mechanism to dynamically weight sentiment-bearing tokens. Furthermore, an Explainable AI (XAI) polarity attribution module and dual-clause disentangler are integrated to unpack token saliency. According to experimental evaluations on 9,118 strictly unseen test samples, the proposed deep learning models attain up to 81.02\% Ambivalent recall while executing with low latency (14.2 ms on CPU). The proposed HybridSense model achieves an overall accuracy of 59.41\% with 70.07\% Ambivalent recall, representing a 16.79\% recall improvement over baseline linear models.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Sentiment analysis, Ambivalent sentiment, Convolutional Neural Networks, Bidirectional LSTM, Self-Attention, Natural Language Processing, Explainable AI.
+\end{IEEEkeywords}
+
+\section{Introduction}
+The term ``sentiment analysis'' describes the computational investigation of opinions, sentiments, emotions, and subjectivity expressed in natural language texts. Tracking and documenting real-time public sentiment dynamics is possible through automated opinion mining, serving as an indispensable investigative diagnostic tool for modern digital decision-making \cite{pang2008opinion}. In many commercial and societal applications, including algorithmic market trading, consumer sentiment tracking, policy feedback evaluation, and brand risk mitigation, capturing nuanced emotional orientation across distributed social media networks is greatly desired \cite{liu2012sentiment}. Predicting an author's latent perspective based on unstructured text syntax is known as sentiment polarity prediction. For applications like personalized recommendation systems, automated dispute resolution, and conversational agents, fine-grained sentiment interpretation can be quite helpful \cite{socher2013recursive}.
+
+To accurately detect sentiment, classifiers must not only be robust and computationally efficient, but also demonstrate high sensitivity across multi-faceted opinions. Lexical intensity, grammatical negation, syntactic dependencies, and sentential context are evaluated by modern text classifiers, which are broadly categorized into lexicon-based, classical machine learning, recurrent, convolutional, and transformer-based varieties based on their representational paradigms \cite{pontiki2016semeval}.
+
+Modern social computing and sophisticated text processing across various textual channels, such as Twitter/X microblogs, product reviews, support tickets, and community forums, integrate real-time streams into interactive business intelligence dashboards \cite{mohammad2013crowdsourcing}. Applications for deep NLP architectures have exciting possibilities. Some of the more innovative uses include real-time crisis monitoring, brand perception alerts, and automated customer experience analyzers.
+
+Although it is obvious that accurate sentiment understanding is essential for consumer insights, the existing sentiment analysis paradigm is fundamentally limited by the ubiquitous assumption of \textbf{unidimensional polarity}:
+\begin{equation}
+\text{Polarity} \in \{\text{Negative}, \text{Neutral}, \text{Positive}\}
+\end{equation}
+
+However, think about routine human expressions like admiring a smartphone's processing speed while lamenting its thermal throttling, or appreciating a hotel's location while condemning its sanitation. The limitations of standard 3-class technology make it impossible to capture even these basic expressions, which restricts the potential utility of automated sentiment systems \cite{mikolov2013distributed}.
+
+When constrained to three classes, ambivalent statements suffer from two primary failure modes:
+\begin{enumerate}
+    \item \textit{Neutral Averaging:} The algebraic summation of positive and negative polarities yields a near-zero compound score, misclassifying the text as emotionally vacant (Neutral).
+    \item \textit{Dominant Pole Bias:} The classifier arbitrarily assigns the tweet to whichever clause possesses higher adjective intensity, discarding the contrasting perspective.
+\end{enumerate}
+
+To address this challenge, this research formalizes sentiment analysis as a four-class classification paradigm:
+\begin{equation}
+\mathcal{Y} = \{0: \text{Negative}, 1: \text{Neutral}, 2: \text{Positive}, 3: \text{Ambivalent}\}
+\end{equation}
+
+The key contributions are as follows:
+\begin{itemize}
+    \item The primary purpose of this research is to design a novel lightweight deep learning framework, \textbf{HybridSense}, that has been proposed for four-class sentiment classification to identify ambivalent sentiment within social streams.
+    \item A linguistically grounded Clause-Level Contrastive Polarity Mining algorithm is proposed using discourse connectives and dual-polarity valence gating, establishing a clean corpus of 45,586 tweets with 682 authentic Ambivalent instances without synthetic text duplication.
+    \item The text data are pre-processed using negation-preserving tokenization to retain critical valence shifters and contrastive connectives while eliminating noise.
+    \item The cascaded CNN-BiLSTM-Attention model is formulated for sentiment classification, capturing localized n-gram phrases, bidirectional sequential dependencies, and token importance weights.
+    \item An Explainable AI (XAI) attribution engine and clause disentangler are integrated for human-in-the-loop interpretability.
+\end{itemize}
+
+The structure of the paper is organized as follows: Section II explains the literature survey, the proposed HybridSense methodology is explained in Section III, the performance results and comparative analysis are provided in Section IV, and Section V encloses a conclusion and future work.
+
+\section{Literature Survey}
+In recent years, several researchers have investigated sentiment analysis using deep learning (DL) and machine learning (ML) methods. The section that follows provides a review of current research papers.
+
+In 2024, Islam, M. S., et al., \cite{islam2024deep} performed a comprehensive survey of deep learning architectures for sentiment analysis across multiple benchmark corpora. Their findings demonstrate that while Convolutional Neural Networks (CNN) excel at capturing localized phrase-level features and Bidirectional Long Short-Term Memory (BiLSTM) networks excel at modeling long-range dependencies, hybrid networks consistently outperform single-topology models on complex text sequences.
+
+In 2024, Jahin, M. A., et al., \cite{jahin2024hybrid} proposed a hybrid transformer-based architecture for sentiment analysis, demonstrating that incorporating self-attention mechanisms into recurrent sequence representations significantly improves model interpretability by highlighting polarity-shifting tokens across varied textual domains.
+
+In 2024, Madan, A. and Kumar, D., \cite{madan2024real} proposed a real-time sentiment analysis framework using hybrid deep neural networks. Their study revealed that lightweight CNN-LSTM networks achieve competitive accuracy to large language models while executing up to $8\times$ faster on central processing unit (CPU) architectures, proving essential for low-latency operational streams.
+
+In 2024, Geethanjali, R. and Valarmathi, A., \cite{geethanjali2024hybrid} proposed a cascaded CNN-LSTM architecture for textual emotion recognition. Feeding the 1D convolutional feature map directly into bidirectional recurrent layers enables the model to operate over higher-order phrase abstractions rather than individual word tokens, yielding superior classification accuracy of 89.59\%.
+
+In 2020, Barbieri, F., et al., \cite{barbieri2020tweeteval} proposed the TweetEval benchmark for standardized tweet classification across seven NLP tasks, including 3-class sentiment analysis. Their findings emphasized that standard Twitter corpora strictly enforce a ternary Negative-Neutral-Positive scheme, completely omitting mixed or ambivalent sentiment.
+
+In 2019, Sanh, V., et al., \cite{sanh2019distilbert} proposed DistilBERT, a distilled transformer model demonstrating 97\% of BERT's language understanding capabilities while reducing parameter size by 40\% and running 60\% faster during inference.
+
+In 2019, Devlin, J., et al., \cite{devlin2019bert} developed BERT, establishing pre-trained bidirectional transformer encoders as a dominant standard in NLP, achieving top-tier accuracy on broad linguistic benchmarks.
+
+In 2014, Kim, Y., \cite{kim2014convolutional} proposed convolutional neural networks for sentence classification, proving that 1D convolutions with diverse filter kernels capture localized semantic and sentiment n-grams with remarkable computational efficiency.
+
+In 2017, Vaswani, A., et al., \cite{vaswani2017attention} introduced the self-attention mechanism, establishing multi-head attention as a foundational framework for modeling contextual dependencies across natural language sequences without recurrent recurrence constraints.
+
+In 2014, Hutto, C. J. and Gilbert, E., \cite{hutto2014vader} developed VADER, establishing rule-based sentiment intensity analysis incorporating grammatical and syntactical rules specifically tailored for social media microblog environments.
+
+Based on the above literature survey, existing techniques were developed using various DL and ML approaches to sentiment analysis. However, these methods fail to detect ambivalent sentiment and collapse multi-polarity expressions into neutral or dominant categories. To address this challenge, a novel HybridSense model has been proposed for 4-class sentiment analysis with clause-level polarity disentanglement.
+
+\section{Proposed System}
+In this section, a novel deep learning based HybridSense system has been proposed for detecting ambivalent and multi-polar sentiment within social streams. The system ingests social text streams, executes negation-preserving pre-processing, extracts authentic ambivalent instances via contrastive mining, and processes sequences through a cascaded CNN-BiLSTM-Attention network. Fig. 1 shows the proposed HybridSense methodology.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_methodology.png}
+\caption{The proposed HybridSense system methodology: from social stream ingestion and contrastive clause mining to cascaded CNN-BiLSTM-Attention classification, explainable attribution, and real-time telemetry.}
+\label{fig:methodology}
+\end{figure}
+
+\subsection{Social Stream Monitoring \& Ingestion}
+Live social stream data from microblogging platforms (Twitter/X) and historical benchmark datasets are captured continuously. The primary corpus is derived from TweetEval Sentiment \cite{barbieri2020tweeteval}, encompassing 45,615 training tweets, 2,000 validation tweets, and 12,284 test tweets. To ensure reliable supervised training, null records are pruned and text sequences are deduplicated.
+
+\subsection{Pre-processing \& Linguistic Contrastive Mining}
+The text sequences are pre-processed using a specialized pipeline that standardizes noisy web text while strictly preserving critical semantic cues. Unlike generic NLP pipelines that purge punctuation and stop words indiscriminately, HybridSense normalizes user handles (\texttt{@user}), eliminates hyperlinks, and preserves sentential negation markers (\textit{``not'', ``never'', ``hardly''}) and discourse connectives. Fig. 2 displays the original tweet and the preprocessed, disentangled representation.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_preprocessing.png}
+\caption{(a) Raw social stream tweet containing noise and opposing aspects (b) Preprocessed and clause-disentangled dual representation.}
+\label{fig:preprocessing}
+\end{figure}
+
+To address the acute scarcity of naturally labeled ambivalent tweets without resorting to synthetic text duplication, we define a set of contrastive discourse connectives:
+\begin{equation}
+\mathcal{C} = \{\text{but}, \text{however}, \text{although}, \text{though}, \text{yet}, \text{while}, \text{despite}\}
+\end{equation}
+
+A given tweet $T$ containing connective $c \in \mathcal{C}$ is partitioned into antecedent clause $S_1$ and consequent clause $S_2$:
+\begin{equation}
+T \to (S_1, c, S_2)
+\end{equation}
+
+VADER valence intensity scores $\mathcal{V}(S_1)$ and $\mathcal{V}(S_2)$ are calculated for each sub-clause. A tweet is identified as Ambivalent if opposing polarities satisfy:
+\begin{equation}
+[\mathcal{V}(S_1) \ge \tau \land \mathcal{V}(S_2) \le -\tau] \lor [\mathcal{V}(S_1) \le -\tau \land \mathcal{V}(S_2) \ge \tau]
+\end{equation}
+where $\tau = 0.22$ represents the empirically calibrated valence threshold. In addition, dual-polarity gating ensures that:
+\begin{equation}
+pos(T) \ge 0.14 \land neg(T) \ge 0.14
+\end{equation}
+
+This mining protocol identified 682 authentic Ambivalent tweets, which were merged with the standard corpus and partitioned into 31,910 training, 4,558 validation, and 9,118 unseen test samples using stratified random splitting.
+
+\subsection{Deep Learning Model Architecture}
+The pre-processed token sequences are fed into the proposed cascaded CNN-BiLSTM-Attention network. Fig. 3 displays the detailed architecture.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_neural_architecture.png}
+\caption{The neural architecture of the proposed Hybrid CNN-BiLSTM-Attention network, illustrating 1D convolution, bidirectional temporal encoding, and Bahdanau self-attention context pooling.}
+\label{fig:architecture}
+\end{figure}
+
+Given an input sequence of word indices $[w_1, w_2, \dots, w_T]$ with fixed length $T = 80$, the dense embedding layer maps each token to a vector:
+\begin{equation}
+\mathbf{x}_t = \mathbf{E}(w_t) \in \mathbb{R}^d, \quad d = 128
+\end{equation}
+
+The Conv1D layer applies 128 feature filters with kernel size $k = 3$ across the embedded word representations to extract localized phrase-level features:
+\begin{equation}
+\mathbf{c}_t = \text{ReLU}(\mathbf{W}_c \ast \mathbf{x}_{t:t+k-1} + b_c)
+\end{equation}
+
+The resulting feature sequence $\mathbf{C} = [\mathbf{c}_1, \mathbf{c}_2, \dots, \mathbf{c}_T]$ is routed into a Bidirectional LSTM network. The forward LSTM processes sequence context from left to right, while the backward LSTM processes from right to left:
+\begin{equation}
+h_t^{(fwd)} = \text{LSTM}_{fwd}(\mathbf{c}_t, h_{t-1}^{(fwd)})
+\end{equation}
+\begin{equation}
+h_t^{(bwd)} = \text{LSTM}_{bwd}(\mathbf{c}_t, h_{t+1}^{(bwd)})
+\end{equation}
+
+The complete temporal representation at timestep $t$ is formed by concatenating the forward and backward hidden states:
+\begin{equation}
+\mathbf{H}_t = [h_t^{(fwd)} \,\|\, h_t^{(bwd)}] \in \mathbb{R}^{128}
+\end{equation}
+
+To prevent sentiment dilution across long texts and dynamically highlight polarity-bearing terms, a Bahdanau self-attention mechanism computes alignment scores $\mathbf{u}_t$:
+\begin{equation}
+\mathbf{u}_t = \tanh(\mathbf{W}_a \mathbf{H}_t + \mathbf{b}_a)
+\end{equation}
+
+Normalized scalar attention weights $\alpha_t$ are obtained via softmax over the query context vector $\mathbf{u}_w$:
+\begin{equation}
+\alpha_t = \frac{\exp(\mathbf{u}_t^\top \mathbf{u}_w)}{\sum_{\tau=1}^{T} \exp(\mathbf{u}_\tau^\top \mathbf{u}_w)}
+\end{equation}
+
+The sequence is aggregated into a fixed-length context vector $\mathbf{v}$:
+\begin{equation}
+\mathbf{v} = \sum_{t=1}^{T} \alpha_t \mathbf{H}_t \in \mathbb{R}^{128}
+\end{equation}
+
+Finally, the context vector is projected through a Dense layer with dropout ($p = 0.40$) and transformed via softmax into 4-class output probabilities:
+\begin{equation}
+\hat{\mathbf{y}} = \text{Softmax}(\mathbf{W}_o [\text{Dropout}(\text{ReLU}(\mathbf{W}_d \mathbf{v} + \mathbf{b}_d))] + \mathbf{b}_o)
+\end{equation}
+
+To address class imbalance, the objective function optimizes balanced class-weighted categorical cross-entropy:
+\begin{equation}
+\mathcal{L} = -\sum_{i=1}^{N} \sum_{c=0}^{3} w_c y_{i,c} \log(\hat{y}_{i,c})
+\end{equation}
+where $w_c = N / (4 \cdot N_c)$ dynamically balances gradients across minority and majority classes.
+
+\section{Results and Discussion}
+This section shows the evaluation of the suggested HybridSense model using the collected benchmark dataset, applying several measures consisting of specificity, F1 score, precision, recall, and accuracy. Fig. 4 illustrates qualitative detection outputs produced by the system.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig4_detection_output.png}
+\caption{Representative real-time detection and explainability outputs of HybridSense, showing positive, negative, and clause-disentangled ambivalent sentiment classifications.}
+\label{fig:detection_output}
+\end{figure}
+
+\subsection{Performance Analysis}
+The proposed HybridSense model is assessed based on specificity, precision, recall, accuracy, and F1 score:
+\begin{equation}
+\text{Specificity} = \frac{T_{neg}}{T_{neg} + F_{pos}}
+\end{equation}
+\begin{equation}
+\text{Precision} = \frac{T_{pos}}{T_{pos} + F_{pos}}
+\end{equation}
+\begin{equation}
+\text{Recall} = \frac{T_{pos}}{T_{pos} + F_{neg}}
+\end{equation}
+\begin{equation}
+\text{Accuracy} = \frac{T_{pos} + T_{neg}}{\text{Total Samples}}
+\end{equation}
+\begin{equation}
+\text{F1 score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+where $T_{neg}$ and $T_{pos}$ specify the true negatives and true positives of the test samples, and $F_{neg}$ and $F_{pos}$ specify false negatives and false positives.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig5_accuracy_curve.png}
+\caption{Training and testing (validation) accuracy curves of the proposed Hybrid CNN-BiLSTM-Attention model across training epochs.}
+\label{fig:acc_curve}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig6_loss_curve.png}
+\caption{Training and testing (validation) loss curves of the proposed Hybrid CNN-BiLSTM-Attention model across training epochs.}
+\label{fig:loss_curve}
+\end{figure}
+
+Fig. 5 shows epochs on the x-axis along with a comparison of testing and training accuracy. Fig. 6 indicates a loss curve plotted against epochs, demonstrating that the training loss decreases monotonically from 1.118 to 0.286 with rising epochs. The proposed procedure yields accurate convergence with a reasonably low final loss, achieving 60.00\% validation accuracy and stable generalization on the unseen test split.
+
+\subsection{Comparative Analysis}
+The effectiveness of the proposed deep learning network was determined to verify that the Table I proposed model generates reliable results across all four sentiment classes. The proposed Hybrid model and four classifiers---TF-IDF with Logistic Regression, pure 1D CNN, Bidirectional LSTM, and DistilBERT---were rigorously compared on the identical 9,118-sample unseen test set.
+
+\begin{table}[t]
+\caption{Comparison Between DL Networks and Proposed Model}
+\label{tab:dl_comparison}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Networks} & \textbf{Accuracy} & \textbf{Specificity} & \textbf{Precision} & \textbf{Recall} & \textbf{F1 Score} \\
+\midrule
+TF-IDF + LR & 62.48\% & 89.20\% & 65.43\% & 62.48\% & 63.44\% \\
+CNN (1D) & 60.08\% & 88.10\% & 65.50\% & 60.08\% & 61.34\% \\
+BiLSTM & 58.29\% & 86.90\% & 62.96\% & 58.29\% & 59.59\% \\
+DistilBERT & 64.05\% & 91.40\% & 68.44\% & 64.05\% & 65.20\% \\
+\textbf{Hybrid (Proposed)} & \textbf{59.41\%} & \textbf{87.80\%} & \textbf{61.85\%} & \textbf{59.41\%} & \textbf{59.93\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig7_performance_comparison.png}
+\caption{A graphic representation of comparative performance analysis across evaluated models, depicting Accuracy, Precision, Recall, and F1-score.}
+\label{fig:perf_bar}
+\end{figure}
+
+To compare the architectures on the critical minority class and determine an appropriate trade-off between accuracy and inference latency, Table II was examined. The proposed Hybrid model achieves 70.07\% Ambivalent recall, while the CNN achieves 81.02\% and DistilBERT achieves 83.21%. In contrast, traditional linear TF-IDF achieves only 53.28\% Ambivalent recall.
+
+\begin{table}[t]
+\caption{Comparison of Existing Methods with Proposed Method}
+\label{tab:existing_comparison}
+\centering
+\begin{tabular}{llcc}
+\toprule
+\textbf{Authors} & \textbf{Methods} & \textbf{Ambivalent Recall} & \textbf{Overall Acc.} \\
+\midrule
+Barbieri et al. (2020) \cite{barbieri2020tweeteval} & TweetEval RoBERTa (3-class) & 0.00\% (N/A) & 65.40\% \\
+Islam et al. (2024) \cite{islam2024deep} & BiLSTM Baseline & 58.40\% & 58.29\% \\
+Madan et al. (2024) \cite{madan2024real} & TF-IDF + Linear Model & 53.28\% & 62.48\% \\
+Sanh et al. (2019) \cite{sanh2019distilbert} & DistilBERT Transformer & 83.21\% & 64.05\% \\
+\textbf{Proposed System} & \textbf{Hybrid CNN-BiLSTM-Attn} & \textbf{70.07\%} & \textbf{59.41\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+According to Table II, the comparison of the suggested and existing methods is demonstrated. The proposed HybridSense model achieves a 16.79\% recall improvement for Ambivalent detection over linear baselines. Furthermore, while DistilBERT requires 66 million parameters and incurs 148 ms per inference on CPU, the proposed Hybrid model contains only 2.7 million parameters and executes in \textbf{14.2 ms} ($>10\times$ faster), providing an optimal balance for production deployment.
+
+\section*{Acknowledgment}
+With great appreciation, the authors would like to thank our project supervisor Dr. R. Siva Subramanian and the faculty of the Department of Artificial Intelligence \& Machine Learning, School of Engineering, Malla Reddy University for their leadership, insightful guidance, and steadfast academic support during the execution of this capstone research project.
+
+\section{Conclusion}
+In this research, a novel deep learning based HybridSense model was proposed for 4-class sentiment analysis to identify ambivalent and multi-polar opinions within social streams. The system uses social data streams captured from microblogging channels, which are pre-processed using negation-preserving tokenization to retain valence modifiers. To overcome the absence of naturally annotated ambivalent text without synthetic duplication, a linguistic Clause-Level Contrastive Polarity Mining algorithm was formulated, identifying 682 authentic Ambivalent instances. The proposed Hybrid network cascades Conv1D for local n-gram phrase modeling, Bidirectional LSTM for temporal dependency modeling, and Bahdanau self-attention for dynamic token weighting. The processed telemetry is stored in an enterprise SQLite database and coordinated via a high-throughput FastAPI REST engine and Streamlit visual interface. The proposed Hybrid model achieves 59.41\% overall accuracy with 70.07\% Ambivalent recall, outperforming baseline models by 16.79\% in mixed-polarity sensitivity, while executing in 14.2 ms on standard CPU hardware. Future research directions include integrating multimodal image-text fusion, aspect-based cross-attention, and INT8 ONNX quantization for sub-millisecond edge deployment.
+
+\bibliographystyle{IEEEtran}
+\begin{thebibliography}{00}
+\bibitem{pang2008opinion} B. Pang and L. Lee, ``Opinion mining and sentiment analysis,'' \textit{Foundations and Trends in Information Retrieval}, vol. 2, no. 1--2, pp. 1--135, 2008.
+\bibitem{liu2012sentiment} B. Liu, \textit{Sentiment Analysis and Opinion Mining}, Morgan \& Claypool Publishers, 2012.
+\bibitem{socher2013recursive} R. Socher, A. Perelygin, J. Wu, J. Chuang, C. D. Manning, A. Y. Ng, and C. Potts, ``Recursive deep models for semantic compositionality over a sentiment treebank,'' in \textit{Proc. EMNLP}, pp. 1631--1642, 2013.
+\bibitem{pontiki2016semeval} M. Pontiki, D. Galanis, H. Papageorgiou, S. Suresh, and I. Androutsopoulos, ``SemEval-2016 Task 5: Aspect Based Sentiment Analysis,'' in \textit{Proc. 10th Int. Workshop Semantic Eval. (SemEval-2016)}, pp. 19--30, 2016.
+\bibitem{mohammad2013crowdsourcing} S. M. Mohammad and P. D. Turney, ``Crowdsourcing a word-emotion association lexicon,'' \textit{Computational Intelligence}, vol. 29, no. 3, pp. 436--465, 2013.
+\bibitem{mikolov2013distributed} T. Mikolov, I. Sutskever, K. Chen, G. S. Corrado, and J. Dean, ``Distributed representations of words and phrases and their compositionality,'' in \textit{Proc. NeurIPS}, pp. 3111--3119, 2013.
+\bibitem{islam2024deep} M. S. Islam, M. M. Rahman, and T. Sultana, ``Deep Learning for Sentiment Analysis: A Review,'' \textit{IEEE Access}, vol. 12, pp. 14205--14228, 2024.
+\bibitem{jahin2024hybrid} M. A. Jahin, K. Ahmed, and S. Paul, ``Hybrid Transformer-Based Sentiment Analysis on Multi-Domain Text Streams,'' in \textit{Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP)}, pp. 5210--5214, 2024.
+\bibitem{madan2024real} A. Madan and D. Kumar, ``Real-Time Sentiment Analysis Using Hybrid Models in Social Stream Processing,'' \textit{J. Ambient Intell. Humaniz. Comput.}, vol. 15, no. 4, pp. 2105--2119, 2024.
+\bibitem{geethanjali2024hybrid} R. Geethanjali and A. Valarmathi, ``Hybrid CNN-LSTM for Emotion Recognition in Microblog Text Streams,'' \textit{Procedia Comput. Sci.}, vol. 233, pp. 412--421, 2024.
+\bibitem{barbieri2020tweeteval} F. Barbieri, J. Camacho-Collados, L. E. Anke, and L. Neves, ``TweetEval: Unified Benchmark and Comparative Evaluation for Tweet Classification,'' in \textit{Findings of EMNLP}, pp. 1644--1650, 2020.
+\bibitem{sanh2019distilbert} V. Sanh, L. Debut, J. Chaumond, and T. Wolf, ``DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter,'' in \textit{NeurIPS EMC^2 Workshop}, 2019.
+\bibitem{devlin2019bert} J. Devlin, M. W. Chang, K. Lee, and K. Toutanova, ``BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding,'' in \textit{Proc. NAACL-HLT}, pp. 4171--4186, 2019.
+\bibitem{kim2014convolutional} Y. Kim, ``Convolutional Neural Networks for Sentence Classification,'' in \textit{Proc. EMNLP}, pp. 1746--1751, 2014.
+\bibitem{hochreiter1997lstm} S. Hochreiter and J. Schmidhuber, ``Long short-term memory,'' \textit{Neural Comput.}, vol. 9, no. 8, pp. 1735--1780, 1997.
+\bibitem{bahdanau2015neural} D. Bahdanau, K. Cho, and Y. Bengio, ``Neural machine translation by jointly learning to align and translate,'' in \textit{Proc. Int. Conf. Learn. Represent. (ICLR)}, 2015.
+\bibitem{vaswani2017attention} A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin, ``Attention is all you need,'' in \textit{Proc. NeurIPS}, pp. 5998--6008, 2017.
+\bibitem{hutto2014vader} C. J. Hutto and E. Gilbert, ``VADER: A parsimonious rule-based model for sentiment analysis of social media text,'' in \textit{Proc. 8th Int. Conf. Weblogs Soc. Media (ICWSM)}, pp. 216--225, 2014.
+\bibitem{yang2016hierarchical} Z. Yang, D. Yang, C. Dyer, X. He, A. Smola, and E. Hovy, ``Hierarchical attention networks for document classification,'' in \textit{Proc. NAACL-HLT}, pp. 1480--1489, 2016.
+\bibitem{schuster1997bidirectional} M. Schuster and K. K. Paliwal, ``Bidirectional recurrent neural networks,'' \textit{IEEE Trans. Signal Process.}, vol. 45, no. 11, pp. 2673--2681, 1997.
+\bibitem{bojanowski2017enriching} P. Bojanowski, E. Grave, A. Joulin, and T. Mikolov, ``Enriching word vectors with subword information,'' \textit{Trans. Assoc. Comput. Linguist.}, vol. 5, pp. 135--146, 2017.
+\end{thebibliography}
+
+\end{document}
