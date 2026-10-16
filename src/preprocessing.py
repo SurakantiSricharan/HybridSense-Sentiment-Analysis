@@ -7,8 +7,12 @@ import re
 import html
 import pickle
 import numpy as np
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+try:
+    from tensorflow.keras.preprocessing.text import Tokenizer
+    from tensorflow.keras.preprocessing.sequence import pad_sequences
+except Exception:
+    Tokenizer = None
+    pad_sequences = None
 from src import config
 
 def clean_tweet_text(text: str) -> str:

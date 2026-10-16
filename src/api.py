@@ -60,7 +60,7 @@ FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 if FRONTEND_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def root():
     index_file = FRONTEND_DIR / "index.html"
     if index_file.exists():
